@@ -42,7 +42,12 @@ class ParseData
     end
 
     def read_file
-      File.read absolute_file_path
+      begin
+        File.read absolute_file_path
+      rescue Errno::ENOENT e
+        raise e
+        exit(1)
+      end
     end
     
     def parse_read_file file
