@@ -10,15 +10,6 @@ class CommandsHandler
     end
 
     def intial_state
-      cli.choose do |menu|
-        menu.prompt = "\n Welcome to Zendesk search \n
-                                    Select search option: \n
-                                    * Press 1 to search Zendesk \n
-                                    * Press 2 to view a list of searchable fields \n"
-        menu.choice('1') { select_type_of_search }
-        menu.choice('2') { puts('2') }
-        menu.default = { }
-      end
     end
 
     def select_type_of_search

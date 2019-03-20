@@ -3,6 +3,8 @@ require_relative '../../services/get_data'
 describe ParseData do
 
   let(:intialised_type) { 'users' }
+  let(:example_valid_absolute_file_path) {'d:/absolute/file/path.json' }
+  let(:example_invalid_absolute_file_path) {'x:/very/bad/file/path/test.json' }
   let(:example_response) { [
     {"_id" => 101, "url" => "http://initech.zendesk.com/api/v2/organizations/101.json"},
     {"_id" => 102, "url" => "http://initech.zendesk.com/api/v2/organizations/102.json"},
@@ -16,7 +18,7 @@ describe ParseData do
       allow_any_instance_of(described_class).to receive(:read_file) { '' }
     end
    
-    subject { described_class.new intialised_type }
+    subject { described_class.new intialised_type, example_valid_absolute_file_path }
 
     describe '#get_type' do
       it 'retuns the type when get type is invoked' do
@@ -40,18 +42,25 @@ describe ParseData do
 
   context 'Given an invalid file path' do
 
-    before(:each) do
-      allow_any_instance_of(described_class).to receive(:absolute_file_path){ 'very/bad/file/path/test.json' }
-    end
-
-    describe 'intialise' do
+    describe 'initialize' do
       it 'raises an error' do
-        expect { described_class.new intialised_type }.to raise_exception(Errno::ENOENT)
+        expect { described_class.new intialised_type, example_invalid_absolute_file_path }.to raise_exception(Errno::ENOENT)
       end
     end
 
   end
 
   context 'Given invalid JSON' do
+
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:read_file){ 'not valid json' }
+    end
+
+    describe 'initialize' do
+      it 'raises an error' do
+        expect { described_class.new intialised_type, example_valid_absolute_file_path }.to raise_exception(JSON::ParserError)
+      end
+    end
+
   end
 end

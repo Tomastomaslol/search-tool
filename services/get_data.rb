@@ -1,24 +1,21 @@
 require "json"
-require 'byebug'
-
-RELATIVE_PATH_TO_FILES = '../../data'.freeze
 
 class ParseData  
 
-  attr_reader :type, :parsed_response
+  attr_reader :type, :parsed_response, :absolute_file_path
 
-    def initialize type
+    def initialize type, absolute_file_path
       @type = type
-      file = read_file
-      @parsed_response = parse_read_file file
+      @absolute_file_path = absolute_file_path
+      @parsed_response = parse_read_file
     end
 
     def get_type
-      @type
+      type
     end
     
     def get_all
-      @parsed_response
+      parsed_response
     end
 
     def get_keys
@@ -33,25 +30,23 @@ class ParseData
 
     private
 
-    def relative_file_path
-      [RELATIVE_PATH_TO_FILES, "#{type}.json"].join('/')
-    end
-
-    def absolute_file_path
-      File.expand_path(relative_file_path, __FILE__ || '')
-    end
-
     def read_file
       begin
         File.read absolute_file_path
-      rescue Errno::ENOENT e
+      rescue Errno::ENOENT => e
+        #puts "#{absolute_file_path} is not a valid file path please provide a valid file path"
         raise e
-        exit(1)
+      rescue Exception => e
+        raise e
       end
     end
     
-    def parse_read_file file
-      JSON.parse(file)
+    def parse_read_file
+      begin 
+        JSON.parse(read_file)
+      rescue Exception => e
+        raise e
+      end
     end 
 
 end  
