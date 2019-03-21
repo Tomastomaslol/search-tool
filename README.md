@@ -5,7 +5,7 @@
 Install the application by running following commands:
 
 ```bash
-git@github.com:Tomastomaslol/search-tool.git
+git clone git@github.com:Tomastomaslol/search-tool.git
 cd search-tool
 . ./install.sh
 ```
