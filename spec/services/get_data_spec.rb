@@ -6,12 +6,12 @@ describe ParseData do
   let(:example_valid_absolute_file_path) {'d:/absolute/file/path.json' }
   let(:example_invalid_absolute_file_path) {'x:/very/bad/file/path/test.json' }
   let(:example_response) { [
-    {"_id" => 101, "url" => "http://initech.zendesk.com/api/v2/organizations/101.json"},
-    {"_id" => 102, "url" => "http://initech.zendesk.com/api/v2/organizations/102.json"},
+    {"_id" => 101, "active" => true, "url" => "http://initech.zendesk.com/api/v2/organizations/101.json"},
+    {"_id" => 102, "active" => true, "url" => "http://initech.zendesk.com/api/v2/organizations/102.json"},
     ]
   }
 
-  context 'Given that parsed data is returned' do
+  context 'Given valid data' do
    
     before(:each) do
       allow_any_instance_of(described_class).to receive(:parse_read_file){ example_response }
@@ -38,6 +38,19 @@ describe ParseData do
       end
     end
 
+    describe '#search_for_value' do
+      it 'returns a search result if there is a match' do
+        expect(subject.search_for_value('_id', '101')).to eq [example_response[0]]
+      end
+
+      it 'returns 2 search results if there is 2 matches' do
+        expect(subject.search_for_value('active', true)).to eq [example_response[0], example_response[1]]
+      end
+
+      it 'returns 0 search results if there is no matches' do
+        expect(subject.search_for_value('active', false)).to eq []
+      end
+    end
   end
 
   context 'Given an invalid file path' do

@@ -17,7 +17,7 @@ class GetFilePath
     private
 
     def string_is_valid? given_value
-      given_value.respond_to?(:to_str) && given_value.length < 0
+      given_value.respond_to?(:to_str) && given_value.length > 0
     end
 
     def get_not_valid_strings_error_message

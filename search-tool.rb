@@ -7,7 +7,7 @@ require_relative './commands/handler'
 
 
 RELATIVE_PATH_TO_FILES = './data'.freeze
-DATA_END_POINTS = ['organizations', 'tickets', 'users'].freeze
+DATA_END_POINTS = ['users', 'tickets', 'organizations'].freeze
 
 @gg = DATA_END_POINTS.map { |end_point|
   path = GetFilePath.new end_point, RELATIVE_PATH_TO_FILES
@@ -15,38 +15,27 @@ DATA_END_POINTS = ['organizations', 'tickets', 'users'].freeze
 }.freeze
 
 commands = CommandsHandler.new
-puts @gg[0].get_all
 
 def get_all_searchable
 @gg.each { |x|
-  #puts "TYPE:" + x.get_type
-  #puts x.get_keys 
+  puts "TYPE:" + x.get_type
+  puts x.get_keys 
 }
 end
 
-def select_type_of_search
-  CommandsHandler.new.choose do |menu|
-    menu.prompt = "\n Welcome to Zendesk search \n
-    Select search option: \n
-    * Press 1 to search Zendesk \n
-    * Press 2 to view a list of searchable fields \n"
-    menu.choice('1') { select_type_of_search }
-    menu.choice('2') { get_all_searchable }
-    menu.choice('quit') { exit(0) }
-    menu.default = { }
-  end
+case commands.intial_state
+  when 1
+   type = commands.select_type_of_search DATA_END_POINTS  
+   valid_search_terms = @gg[(type - 1)].get_keys
+   search_term = commands.select_search_term valid_search_terms
+   search_value = commands.select_search_value
 
-end
-
-commands.choose do |menu|
-  menu.prompt = "\n Welcome to Zendesk search \n
-  Select search option: \n
-  * Press 1 to search Zendesk \n
-  * Press 2 to view a list of searchable fields \n"
-  menu.choice('1') { select_type_of_search }
-  menu.choice('2') { get_all_searchable }
-  menu.choice('quit') { exit(0) }
-  menu.default = { }
+   found = @gg[(type - 1)].search_for_value(search_term, search_value)
+   puts found
+  when 2
+    get_all_searchable
+  else
+    puts "noodldkdkdkdkdbs"
 end
 
 ##intial_state

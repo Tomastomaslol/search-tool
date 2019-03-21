@@ -23,20 +23,36 @@ describe GetFilePath do
   end
 
   context 'Given invalid paths or types' do
-    describe '#absolute_file_path' do
+    describe 'initialize' do
 
-      it 'initialises a valid instance of get file path' do
-        expect(described_class.new([], valid_example_path))
-        .to be false
+      it 'raises an exeception when given an array as type' do
+        expect {
+          described_class.new([], valid_example_path)
+        }.to raise_exception RuntimeError
       end
 
-      it 'initialises a valid instance of get file path' do
-        expect(described_class.new(valid_type, {}))
-        .to be false
+      it 'raises an exeception when given an hash as path' do
+        expect {
+          described_class.new(valid_type, {})
+        }.to raise_exception RuntimeError
       end
-      it 'initialises a valid instance of get file path' do
-        expect(described_class.new({}, []))
-        .to be false
+
+      it 'raises an exeception when given an object as type and array as path' do
+        expect {
+          described_class.new({}, [])
+        }.to raise_exception RuntimeError
+      end
+
+      it 'raises an exeception when given an empty string as type' do
+        expect {
+          described_class.new('', valid_example_path)
+        }.to raise_exception RuntimeError
+      end
+      
+      it 'raises an exeception when given an empty string as path' do
+        expect {
+          described_class.new(valid_example_path, '')
+        }.to raise_exception RuntimeError
       end
     end
 

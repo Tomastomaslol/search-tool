@@ -20,7 +20,7 @@ class ParseData
 
     def get_keys
       unique_keys = []
-      @parsed_response.each do | item |
+      parsed_response.each do |item|
         item.keys.each do | key |
          unique_keys.push(key) unless unique_keys.include? key
         end
@@ -28,6 +28,15 @@ class ParseData
       unique_keys
     end
 
+    
+    def search_for_value search_term, search_value
+      matched_properties = []
+      parsed_response.each do |item|
+        matched_properties.push(item) if item[search_term].to_s == search_value.to_s
+      end
+      matched_properties
+    end
+    
     private
 
     def read_file
