@@ -1,1 +1,1 @@
-ruby search-tool.rb
+ruby -r "./search_tool.rb" -e "start_application"
