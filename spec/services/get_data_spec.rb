@@ -67,8 +67,8 @@ describe ParseData do
 
     describe 'initialize' do
       it 'raises an error' do
-        expect { 
-          described_class.new intialised_type, example_valid_absolute_file_path 
+        expect {
+          described_class.new intialised_type, example_valid_absolute_file_path
         }.to raise_exception(JSON::ParserError)
       end
     end

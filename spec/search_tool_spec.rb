@@ -45,7 +45,8 @@ describe 'start_application' do
     end
     it 'prints the returned search result' do
       start_application
-      expect(report_outcome_stub).to have_received(:print).with(expected_respones).once
+      expect(report_outcome_stub)
+        .to have_received(:print).with(expected_respones).once
     end
   end
 
@@ -57,7 +58,8 @@ describe 'start_application' do
 
     it 'prints all keys' do
       start_application
-      expect(report_outcome_stub).to have_received(:print_all_keys_in_table).once
+      expect(report_outcome_stub)
+        .to have_received(:print_all_keys_in_table).once
     end
   end
 end

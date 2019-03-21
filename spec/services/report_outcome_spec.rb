@@ -1,7 +1,7 @@
 require_relative '../../services/report_outcome'
 
 describe ReportOutcome do
-  
+
   let(:example_config) do
     {
       indent: 99
@@ -13,7 +13,7 @@ describe ReportOutcome do
       indent: 111
     }
   end
-  
+
   context 'Given no config' do
     describe 'initialize' do
 
