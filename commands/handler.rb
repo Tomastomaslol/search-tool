@@ -39,4 +39,16 @@ class CommandsHandler
   def select_search_value
     cli.ask("\n Search value? \n")
   end
+
+  def re_run_application?
+    cli.choose do |menu|
+      menu.prompt = "\n
+                    Would like to run the application again?\n
+                    Enter Y to run again or Q to exit\n
+                    \n"
+      menu.choice(:Y, :y) { true }
+      menu.choices(:Q, :q) { false }
+      menu.default = :Y
+    end
+  end
 end

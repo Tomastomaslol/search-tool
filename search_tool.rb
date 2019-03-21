@@ -30,6 +30,9 @@ def start_application
   when 2
     report.print_all_keys_in_table all_data_endpoints
   else
-    raise 'invalid outcome'
+    raise 'invalid outcome from intial state'
   end
+
+  commands.re_run_application? ? start_application : Kernel.exit(0)
+
 end

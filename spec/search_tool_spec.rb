@@ -12,7 +12,8 @@ describe 'start_application' do
                     intial_state: 1,
                     select_search_term: '',
                     select_type_of_search: 2,
-                    select_search_value: '')
+                    select_search_value: '',
+                    re_run_application?: false)
   end
 
   let(:parse_data_stub) do
@@ -31,10 +32,11 @@ describe 'start_application' do
     allow(CommandsHandler).to receive(:new).and_return(commands_handler_stub)
     allow(ParseData).to receive(:new).and_return(parse_data_stub)
     allow(ReportOutcome).to receive(:new).and_return(report_outcome_stub)
+    allow(Kernel).to receive(:exit).and_return('')
   end
 
   describe 'Given that user choses to search Zen desk' do
-    it 'calls the questions and get the data for questions in the correct order' do
+    it 'calls the questions and gets the data for questions in the correct order' do
       start_application
 
       expect(commands_handler_stub).to have_received(:select_type_of_search).ordered
@@ -43,10 +45,17 @@ describe 'start_application' do
       expect(commands_handler_stub).to have_received(:select_search_value).ordered
       expect(parse_data_stub).to have_received(:search_for_value).ordered
     end
+
     it 'prints the returned search result' do
       start_application
       expect(report_outcome_stub)
         .to have_received(:print).with(expected_respones).once
+    end
+
+    it 'ask the user if would like to run the application again' do
+      start_application
+      expect(commands_handler_stub)
+        .to have_received(:re_run_application?).once
     end
   end
 
@@ -60,6 +69,12 @@ describe 'start_application' do
       start_application
       expect(report_outcome_stub)
         .to have_received(:print_all_keys_in_table).once
+    end
+
+    it 'ask the user if would like to run the application again' do
+      start_application
+      expect(commands_handler_stub)
+        .to have_received(:re_run_application?).once
     end
   end
 end

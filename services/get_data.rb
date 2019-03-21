@@ -39,9 +39,6 @@ class ParseData
 
   def read_file
     File.read absolute_file_path
-  rescue Errno::ENOENT => e
-    # puts "#{absolute_file_path} is not a valid file path please provide a valid file path"
-    raise e
   rescue Exception => e
     raise e
   end

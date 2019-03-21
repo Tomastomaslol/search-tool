@@ -26,7 +26,7 @@ describe ReportOutcome do
         expect(described_class.new).to be_an_instance_of described_class
       end
 
-      it 'sets given valid config' do
+      it 'sets config to default config' do
         expect(described_class.new()
           .instance_variable_get(:@config)).to be example_default_config
       end
@@ -39,7 +39,7 @@ describe ReportOutcome do
         expect(described_class.new(example_config)).to be_an_instance_of described_class
       end
 
-      it 'sets given valid config' do
+      it 'sets config to given valid config' do
         expect(described_class.new(example_config)
           .instance_variable_get(:@config)).to be example_config
       end

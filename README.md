@@ -1,4 +1,4 @@
-# cli-json-searh-tool
+# cli-json-search-tool
 
 ## How to run
 

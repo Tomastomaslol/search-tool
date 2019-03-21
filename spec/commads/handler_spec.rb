@@ -9,6 +9,7 @@ describe CommandsHandler do
     allow(HighLine).to receive(:new).and_return(stub_higline)
     allow(stub_higline).to receive(:say).and_return('')
     allow(stub_higline).to receive(:ask).and_return('')
+    allow(stub_higline).to receive(:choose).and_return('')
   end
 
   subject { described_class.new }
@@ -68,6 +69,13 @@ describe CommandsHandler do
     it 'asks a question' do
       subject.select_search_value
       expect(stub_higline).to have_received(:ask).once
+    end
+  end
+
+  describe '#re_run_application?' do
+    it 'prints a re run or quit menu' do
+      subject.re_run_application?
+      expect(stub_higline).to have_received(:choose).once
     end
   end
 end
