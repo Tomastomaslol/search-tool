@@ -18,7 +18,8 @@ describe ReportOutcome do
     describe 'initialize' do
 
       before(:each) do
-        allow_any_instance_of(described_class).to receive(:default_config) { example_default_config }
+        allow_any_instance_of(described_class)
+          .to receive(:default_config) { example_default_config }
       end
 
       it 'initialises a valid instance of report outcome' do

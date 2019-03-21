@@ -55,14 +55,17 @@ describe ParseData do
   context 'Given an invalid file path' do
     describe 'initialize' do
       it 'raises an error' do
-        expect { described_class.new intialised_type, example_invalid_absolute_file_path }.to raise_exception(Errno::ENOENT)
+        expect {
+          described_class.new intialised_type, example_invalid_absolute_file_path
+        }.to raise_exception(Errno::ENOENT)
       end
     end
   end
 
   context 'Given invalid JSON' do
     before(:each) do
-      allow_any_instance_of(described_class).to receive(:read_file) { 'not valid json' }
+      allow_any_instance_of(described_class)
+        .to receive(:read_file) { 'not valid json' }
     end
 
     describe 'initialize' do
