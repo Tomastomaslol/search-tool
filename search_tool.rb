@@ -1,4 +1,4 @@
-require_relative './services/get_data'
+require_relative './services/data_handler'
 require_relative './services/get_file_path'
 require_relative './services/report_outcome'
 require_relative './commands/handler'
@@ -9,7 +9,7 @@ DATA_END_POINTS = %w[users tickets organizations].freeze
 def start_application
   all_data_endpoints = DATA_END_POINTS.map do |end_point|
     path = GetFilePath.new end_point, RELATIVE_PATH_TO_FILES
-    ParseData.new end_point, path.absolute_file_path
+    DataHandler.new end_point, path.absolute_file_path
   end.freeze
 
   commands = CommandsHandler.new

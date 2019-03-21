@@ -1,6 +1,6 @@
 require 'json'
 
-class ParseData
+class DataHandler
   attr_reader :type, :parsed_response, :absolute_file_path
 
   def initialize(type, absolute_file_path)

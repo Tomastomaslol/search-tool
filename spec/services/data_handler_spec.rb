@@ -1,6 +1,6 @@
-require_relative '../../services/get_data'
+require_relative '../../services/data_handler'
 
-describe ParseData do
+describe DataHandler do
   let(:intialised_type) { 'users' }
   let(:example_valid_absolute_file_path) { 'd:/absolute/file/path.json' }
   let(:example_invalid_absolute_file_path) { 'x:/very/bad/file/path/test.json' }
