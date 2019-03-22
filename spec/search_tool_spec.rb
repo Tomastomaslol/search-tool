@@ -19,7 +19,7 @@ describe 'start_application' do
   let(:parse_data_stub) do
     instance_double(DataHandler, 'DataHandlerStub',
                     get_keys: '',
-                    search_for_value: expected_response)
+                    get_all: '')
   end
 
   let(:report_outcome_stub) do
@@ -28,10 +28,16 @@ describe 'start_application' do
                     print_all_keys_in_table: '')
   end
 
+  let(:search_stub) do
+    instance_double(Search, 'SearchStub',
+                    find_matching_terms: expected_response)
+  end
+
   before do
     allow(CommandsHandler).to receive(:new).and_return(commands_handler_stub)
     allow(DataHandler).to receive(:new).and_return(parse_data_stub)
     allow(ReportOutcome).to receive(:new).and_return(report_outcome_stub)
+    allow(Search).to receive(:new).and_return(search_stub)
     allow(Kernel).to receive(:exit).and_return('')
   end
 
@@ -43,7 +49,8 @@ describe 'start_application' do
       expect(parse_data_stub).to have_received(:get_keys).ordered
       expect(commands_handler_stub).to have_received(:select_search_term).ordered
       expect(commands_handler_stub).to have_received(:select_search_value).ordered
-      expect(parse_data_stub).to have_received(:search_for_value).ordered
+      expect(parse_data_stub).to have_received(:get_all).ordered
+      expect(search_stub).to have_received(:find_matching_terms).ordered
     end
 
     it 'prints the returned search result' do
