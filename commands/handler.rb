@@ -44,11 +44,11 @@ class CommandsHandler
     cli.choose do |menu|
       menu.prompt = "\n
                     Would like to run the application again?\n
-                    Enter Y to run again or Q to exit\n
+                    Enter y/1 to run again or q/2 to exit\n
                     \n"
-      menu.choice(:Y, :y) { true }
-      menu.choices(:Q, :q) { false }
-      menu.default = :Y
+      menu.choice(:y) { true }
+      menu.choices(:q) { false }
+      menu.default = :y
     end
   end
 end
