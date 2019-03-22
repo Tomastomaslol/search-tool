@@ -46,7 +46,7 @@ class DataHandler
   private
 
   def match_search_result_to_type_array(data_source_value, search_value)
-    matched_search_results = data_source_value.to_a.select do |map_value|
+    data_source_value.to_a.select do |map_value|
       map_value.to_s.upcase.include?(search_value.to_s.upcase)
     end.any?
   end
