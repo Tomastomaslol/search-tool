@@ -6,7 +6,7 @@ class GetFilePath
   def initialize(type, relative_path_to_file)
     @type = type
     @relative_path_to_file = relative_path_to_file
-    raise get_not_valid_strings_error_message unless given_valid_string?
+    validate_given_input
   end
 
   def absolute_file_path
@@ -19,14 +19,12 @@ class GetFilePath
     given_value.respond_to?(:to_str) && !given_value.empty?
   end
 
-  def get_not_valid_strings_error_message
-    [!string_is_valid?(type) ? "type: #{type}" : '',
-     !string_is_valid?(relative_path_to_file) ? "relative_path_to_file: #{relative_path_to_file}" : '',
-     'is not valid input to GetFilePath'].reject(&:empty?).join(' ')
-  end
-
-  def given_valid_string?
-    string_is_valid?(type) && string_is_valid?(relative_path_to_file)
+  def validate_given_input
+    errors = []
+    errors.push("type: '#{type}'") unless string_is_valid?(type)
+    errors.push("relative_path_to_file: '#{relative_path_to_file}'") unless
+      string_is_valid?(relative_path_to_file)
+    raise "Invalid input for GetFilePath Service #{errors.join(', ')}" if errors.any?
   end
 
   def get_relative_file_path
