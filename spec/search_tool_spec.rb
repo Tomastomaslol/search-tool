@@ -1,7 +1,7 @@
 require_relative '../search_tool'
 
 describe 'start_application' do
-  let(:expected_respones) do
+  let(:expected_response) do
     {
       expect: 'response'
     }
@@ -9,7 +9,7 @@ describe 'start_application' do
 
   let(:commands_handler_stub) do
     instance_double(CommandsHandler, 'CommandsHandlerStub',
-                    intial_state: 1,
+                    initial_state: 1,
                     select_search_term: '',
                     select_type_of_search: 2,
                     select_search_value: '',
@@ -19,7 +19,7 @@ describe 'start_application' do
   let(:parse_data_stub) do
     instance_double(DataHandler, 'DataHandlerStub',
                     get_keys: '',
-                    search_for_value: expected_respones)
+                    search_for_value: expected_response)
   end
 
   let(:report_outcome_stub) do
@@ -49,7 +49,7 @@ describe 'start_application' do
     it 'prints the returned search result' do
       start_application
       expect(report_outcome_stub)
-        .to have_received(:print).with(expected_respones).once
+        .to have_received(:print).with(expected_response).once
     end
 
     it 'asks the user if they would like to run the application again' do
@@ -60,9 +60,8 @@ describe 'start_application' do
   end
 
   describe 'Given that the user picks the option to view a list of searchable fields' do
-
     before do
-      allow(commands_handler_stub).to receive(:intial_state).and_return(2)
+      allow(commands_handler_stub).to receive(:initial_state).and_return(2)
     end
 
     it 'prints all keys' do

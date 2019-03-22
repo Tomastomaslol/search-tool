@@ -15,7 +15,7 @@ def start_application
   commands = CommandsHandler.new
   report = ReportOutcome.new
 
-  case commands.intial_state
+  case commands.initial_state
   when 1
     type = commands.select_type_of_search DATA_END_POINTS
 
@@ -30,7 +30,7 @@ def start_application
   when 2
     report.print_all_keys_in_table all_data_endpoints
   else
-    raise 'invalid outcome from intial state'
+    raise 'invalid outcome from initial state'
   end
 
   commands.re_run_application? ? start_application : Kernel.exit(0)

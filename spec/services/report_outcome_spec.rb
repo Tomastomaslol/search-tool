@@ -36,7 +36,8 @@ describe ReportOutcome do
   context 'Given config' do
     describe 'initialize' do
       it 'initialises a valid instance of report outcome' do
-        expect(described_class.new(example_config)).to be_an_instance_of described_class
+        expect(described_class.new(example_config))
+          .to be_an_instance_of described_class
       end
 
       it 'sets config to given valid config' do

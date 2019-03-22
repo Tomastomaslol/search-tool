@@ -7,7 +7,7 @@ class CommandsHandler
     @cli = HighLine.new
   end
 
-  def intial_state
+  def initial_state
     cli.say "\nWelcome to Zendesk search \n
     Select search option: \n
     * Press 1 to search Zendesk \n

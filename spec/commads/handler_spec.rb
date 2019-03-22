@@ -20,14 +20,14 @@ describe CommandsHandler do
     end
   end
 
-  describe '#intial_state' do
+  describe '#initial_state' do
     it 'says what the question is' do
-      subject.intial_state
+      subject.initial_state
       expect(stub_higline).to have_received(:say).once
     end
 
     it 'asks a question' do
-      subject.intial_state
+      subject.initial_state
       expect(stub_higline).to have_received(:ask).once
     end
   end

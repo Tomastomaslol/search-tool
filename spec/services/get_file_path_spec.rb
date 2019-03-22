@@ -22,31 +22,31 @@ describe GetFilePath do
 
   context 'Given invalid paths or types' do
     describe 'initialize' do
-      it 'raises an exeception when given an array as type' do
+      it 'raises an exception when given an array as type' do
         expect do
           described_class.new([], valid_example_path)
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exeception when given an hash as path' do
+      it 'raises an exception when given an hash as path' do
         expect do
           described_class.new(valid_type, {})
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exeception when given an object as type and array as path' do
+      it 'raises an exception when given an object as type and array as path' do
         expect do
           described_class.new({}, [])
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exeception when given an empty string as type' do
+      it 'raises an exception when given an empty string as type' do
         expect do
           described_class.new('', valid_example_path)
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exeception when given an empty string as path' do
+      it 'raises an exception when given an empty string as path' do
         expect do
           described_class.new(valid_example_path, '')
         end.to raise_exception RuntimeError

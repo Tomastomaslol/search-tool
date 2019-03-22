@@ -1,8 +1,8 @@
 require 'json'
 
 # Not sure if you wanted me to write some thing smarter or just match strings.
-# So I added a 'config' so you can run it in different modes
-SLIGTHLY_SMARTER_SEARCH = true
+# So I added a 'config' so you can run the application in different modes
+SLIGHTLY_SMARTER_SEARCH = true
 
 class DataHandler
   attr_reader :type, :parsed_response, :absolute_file_path
@@ -34,7 +34,7 @@ class DataHandler
   def search_for_value(search_term, search_value)
     matched_properties = []
     parsed_response.each do |item|
-      if SLIGTHLY_SMARTER_SEARCH
+      if SLIGHTLY_SMARTER_SEARCH
         matched_properties.push(item) if match_search item[search_term], search_value
       else
         matched_properties.push(item) if simple_search item[search_term], search_value
@@ -56,7 +56,7 @@ class DataHandler
     end
   end
 
-  def simple_search data_source_value, search_value
+  def simple_search(data_source_value, search_value)
     data_source_value.to_s == search_value.to_s
   end
 
