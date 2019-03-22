@@ -16,7 +16,7 @@ describe 'start_application' do
                     re_run_application?: false)
   end
 
-  let(:parse_data_stub) do
+  let(:data_handler_stub) do
     instance_double(DataHandler, 'DataHandlerStub',
                     get_keys: '',
                     get_all: '')
@@ -35,7 +35,7 @@ describe 'start_application' do
 
   before do
     allow(CommandsHandler).to receive(:new).and_return(commands_handler_stub)
-    allow(DataHandler).to receive(:new).and_return(parse_data_stub)
+    allow(DataHandler).to receive(:new).and_return(data_handler_stub)
     allow(ReportOutcome).to receive(:new).and_return(report_outcome_stub)
     allow(Search).to receive(:new).and_return(search_stub)
     allow(Kernel).to receive(:exit).and_return('')
@@ -46,10 +46,10 @@ describe 'start_application' do
       start_application
 
       expect(commands_handler_stub).to have_received(:select_type_of_search).ordered
-      expect(parse_data_stub).to have_received(:get_keys).ordered
+      expect(data_handler_stub).to have_received(:get_keys).ordered
       expect(commands_handler_stub).to have_received(:select_search_term).ordered
       expect(commands_handler_stub).to have_received(:select_search_value).ordered
-      expect(parse_data_stub).to have_received(:get_all).ordered
+      expect(data_handler_stub).to have_received(:get_all).ordered
       expect(search_stub).to have_received(:find_matching_terms).ordered
     end
 
