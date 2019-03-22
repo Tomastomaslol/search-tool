@@ -41,19 +41,19 @@ describe DataHandler do
       subject { described_class.new initialised_type, example_valid_absolute_file_path }
 
       describe '#get_type' do
-        it 'returns the type when get type is invoked' do
+        it 'returns the type when invoked' do
           expect(subject.get_type).to be initialised_type
         end
       end
 
       describe '#get_all' do
-        it 'returns all returned when invoked' do
+        it 'returns all returned data when invoked' do
           expect(subject.get_all).to eq example_response
         end
       end
 
       describe '#get_keys' do
-        it 'gets all keys in response' do
+        it 'returns all keys in response data' do
           expect(subject.get_keys).to eq example_response.map(&:keys).flatten.uniq
         end
       end
@@ -80,7 +80,7 @@ describe DataHandler do
             .to eq [example_response[0]]
         end
 
-        it 'returns 2 search results if there is a matching tag' do
+        it 'returns 2 search results if there is 2 matching tag' do
           expect(subject.search_for_value('tags', 'desk'))
             .to eq [example_response[0], example_response[1]]
         end

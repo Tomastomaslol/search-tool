@@ -26,7 +26,7 @@ describe CommandsHandler do
       expect(stub_higline).to have_received(:say).once
     end
 
-    it 'asks a question' do
+    it 'asks the question' do
       subject.initial_state
       expect(stub_higline).to have_received(:ask).once
     end
@@ -43,7 +43,7 @@ describe CommandsHandler do
       expect(stub_higline).to have_received(:say).with(/User/).once
     end
 
-    it 'asks a question' do
+    it 'asks the question' do
       subject.select_type_of_search example_valid_type_of_search
       expect(stub_higline).to have_received(:ask).once
     end
@@ -59,14 +59,14 @@ describe CommandsHandler do
       expect(stub_higline).to have_received(:say).with(/subject/).once
     end
 
-    it 'asks a question' do
+    it 'asks the question' do
       subject.select_search_term example_valid_search_terms
       expect(stub_higline).to have_received(:ask).once
     end
   end
 
   describe '#select_search_value' do
-    it 'asks a question' do
+    it 'asks the question' do
       subject.select_search_value
       expect(stub_higline).to have_received(:ask).once
     end

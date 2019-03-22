@@ -36,7 +36,7 @@ describe 'start_application' do
   end
 
   describe 'Given that the user picks the option to search Zen desk' do
-    it 'calls the questions and gets the data for questions in the correct order' do
+    it 'calls the questions and gets the data for the questions in the correct order' do
       start_application
 
       expect(commands_handler_stub).to have_received(:select_type_of_search).ordered
