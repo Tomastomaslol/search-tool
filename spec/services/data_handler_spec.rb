@@ -1,7 +1,7 @@
 require_relative '../../services/data_handler'
 
 describe DataHandler do
-  let(:initialised_type) { 'users' }
+  let(:example_type) { 'users' }
   let(:example_valid_absolute_file_path) { 'd:/absolute/file/path.json' }
   let(:example_invalid_absolute_file_path) { 'x:/very/bad/file/path/test.json' }
   let(:example_response) do
@@ -37,11 +37,11 @@ describe DataHandler do
       allow_any_instance_of(described_class).to receive(:SLIGHTLY_SMARTER_SEARCH) { true }
     end
 
-    subject { described_class.new initialised_type, example_valid_absolute_file_path }
+    subject { described_class.new example_type, example_valid_absolute_file_path }
 
     describe '#get_type' do
       it 'returns the type when invoked' do
-        expect(subject.get_type).to be initialised_type
+        expect(subject.get_type).to be example_type
       end
     end
 
@@ -62,7 +62,7 @@ describe DataHandler do
     describe 'initialize' do
       it 'raises an error' do
         expect do
-          described_class.new initialised_type, example_invalid_absolute_file_path
+          described_class.new example_type, example_invalid_absolute_file_path
         end.to raise_exception(Errno::ENOENT)
       end
     end
@@ -77,7 +77,7 @@ describe DataHandler do
     describe 'initialize' do
       it 'raises an error' do
         expect do
-          described_class.new initialised_type, example_valid_absolute_file_path
+          described_class.new example_type, example_valid_absolute_file_path
         end.to raise_exception(JSON::ParserError)
       end
     end

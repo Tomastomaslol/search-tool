@@ -11,7 +11,7 @@ class Search
     @parsed_response = parsed_response
     @search_term = search_term
     @search_value = search_value
-    validate_given_input
+    validate_given_input!
   end
 
   def find_matching_terms
@@ -34,7 +34,7 @@ class Search
     parsed_response.all? { |item| item.is_a?(Hash) }
   end
 
-  def validate_given_input
+  def validate_given_input!
     errors = []
     errors.push("search_term: '#{search_term}'") unless search_term.respond_to?(:to_str)
     errors.push("search_value: '#{search_value}'") unless search_value.respond_to?(:to_s)
