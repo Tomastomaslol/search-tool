@@ -1,7 +1,6 @@
 require_relative '../../services/report_outcome'
 
 describe ReportOutcome do
-
   let(:example_config) do
     {
       indent: 99
@@ -16,17 +15,16 @@ describe ReportOutcome do
 
   let(:data_handler_stub) do
     instance_double(DataHandler, 'DataHandlerStub',
-                   get_type: 'user',
-                   get_keys: ['example key1', 'example key2'])
+                    get_type: 'user',
+                    get_keys: ['example key1', 'example key2'])
   end
 
-  let(:all_data_handlers) {[data_handler_stub, data_handler_stub]}
+  let(:all_data_handlers) { [data_handler_stub, data_handler_stub] }
 
-  let(:example_print_output) { [{'a': 'b'}] }
+  let(:example_print_output) { [{ 'a': 'b' }] }
 
   context 'Given no config' do
     describe 'initialize' do
-
       before do
         allow_any_instance_of(described_class)
           .to receive(:default_config) { example_default_config }
@@ -37,18 +35,17 @@ describe ReportOutcome do
       end
 
       it 'sets config to default config' do
-        expect(described_class.new()
+        expect(described_class.new
           .instance_variable_get(:@config)).to be example_default_config
       end
     end
 
     describe '#print_all_keys_in_table' do
-
       before do
         allow(Kernel).to receive(:print).and_return('')
       end
 
-      subject { described_class.new() }
+      subject { described_class.new }
 
       it 'prints given table headers to the system' do
         subject.print_all_keys_in_table(all_data_handlers)
@@ -61,14 +58,13 @@ describe ReportOutcome do
       end
     end
     describe '#print' do
-
       before do
         allow(Kernel).to receive(:print).and_return(nil)
         allow_any_instance_of(described_class)
           .to receive(:print_output).and_return(nil)
       end
 
-      subject {described_class.new() }
+      subject { described_class.new }
 
       it "prints a 'no search results 'message to system if given an empty object" do
         subject.print([])
