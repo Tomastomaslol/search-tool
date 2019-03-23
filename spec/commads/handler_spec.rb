@@ -73,7 +73,7 @@ describe CommandsHandler do
   end
 
   describe '#re_run_application?' do
-    it 'prints a re run or quit menu' do
+    it 'prints a rerun or quit menu' do
       subject.re_run_application?
       expect(stub_higline).to have_received(:choose).once
     end

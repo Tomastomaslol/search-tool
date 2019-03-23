@@ -1,26 +1,42 @@
 require 'awesome_print'
 
+
+HEADLINE_BREAK_LINE = " \n#{'-' * 50}\n ".freeze
+NO_SEARCH_RESULTS_FOUND = "\nNo search results found\n".freeze
+
 class ReportOutcome
   attr_reader :config
 
   def initialize(config = false)
-    @config =  config || default_config
+    @config = config || default_config
   end
 
   def print(output)
-    ap output, config
+    return Kernel.print NO_SEARCH_RESULTS_FOUND if output.empty?
+
+    print_output output
   end
 
   def print_all_keys_in_table(table_data)
+    print_break
     table_data.each do |end_point|
-      puts "\n#{'-' * 50}"
-      puts end_point.get_type.capitalize
-      puts "#{'-' * 50}\n"
-      puts end_point.get_keys
+      Kernel.print (HEADLINE_BREAK_LINE +
+                   end_point.get_type.capitalize +
+                   HEADLINE_BREAK_LINE)
+      Kernel.print end_point.get_keys.join("\n")
     end
+    print_break
   end
 
   private
+
+  def print_output(output)
+    ap output, config
+  end
+
+  def print_break
+    Kernel.print "\n\n"
+  end
 
   def default_config
     {
