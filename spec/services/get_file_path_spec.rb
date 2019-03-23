@@ -13,7 +13,7 @@ describe GetFilePath do
     end
 
     describe '#absolute_file_path' do
-      it 'returns an valid absolute path when invoked' do
+      it 'returns an valid absolute file path when invoked' do
         expect(described_class.new(valid_type, valid_example_path).absolute_file_path)
           .to eq File.expand_path("#{valid_example_path}/#{valid_type}.json")
       end
@@ -28,7 +28,7 @@ describe GetFilePath do
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exception when given an hash as path' do
+      it 'raises an exception when given a hash as path' do
         expect do
           described_class.new(valid_type, {})
         end.to raise_exception RuntimeError

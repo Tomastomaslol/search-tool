@@ -66,13 +66,13 @@ describe ReportOutcome do
 
       subject { described_class.new }
 
-      it "prints a 'no search results 'message to system if given an empty object" do
+      it "prints a 'no search results' message to system if given an empty object" do
         subject.print([])
         expect(Kernel).to have_received(:print)
           .with(/No search results found/).once
       end
 
-      it "does not print a 'no search result's message to system if given an valid object" do
+      it "does not print a 'no search results' message to system if given an valid object" do
         subject.print(example_print_output)
         expect(Kernel).to_not have_received(:print)
       end

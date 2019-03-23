@@ -78,13 +78,13 @@ describe Search do
             .find_matching_terms).to eq [example_picked_type_data[0]]
         end
 
-        it 'returns 2 search results if there is 2 matching tag' do
+        it 'returns 2 search results if there are 2 matching tags' do
           expect(described_class.new(example_picked_type_data, 'tags', 'desk')
             .find_matching_terms).to eq [example_picked_type_data[0],
                                          example_picked_type_data[1]]
         end
 
-        it 'returns 2 search results if there is 2 partially matching tag' do
+        it 'returns 2 search results if there are 2 partially matching tags' do
           expect(described_class.new(example_picked_type_data, 'tags', 'des')
             .find_matching_terms)
             .to eq [example_picked_type_data[0], example_picked_type_data[1]]
@@ -113,12 +113,12 @@ describe Search do
           .find_matching_terms).to eq [example_picked_type_data[0]]
       end
 
-      it 'returns 2 search results if there is 2 matches' do
+      it 'returns 2 search results if there are 2 matches' do
         expect(described_class.new(example_picked_type_data, 'active', true)
           .find_matching_terms).to eq example_picked_type_data
       end
 
-      it 'returns 0 search results if there is no matches' do
+      it 'returns 0 search results if there are no matches' do
         expect(described_class.new(example_picked_type_data, 'active', false)
           .find_matching_terms).to eq []
       end
@@ -134,14 +134,14 @@ describe Search do
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exception when given array has none hash included in parsed response' do
+      it 'raises an exception when given array has no hash included in parsed response' do
         expect do
           described_class.new(unexpected_string_in_example_picked_type_data,
                               example_search_term, example_search_value)
         end.to raise_exception RuntimeError
       end
 
-      it 'raises an exception when given an none string for search term' do
+      it 'raises an exception when given a non string for search term' do
         expect do
           described_class.new(example_picked_type_data, [], example_search_value)
         end.to raise_exception RuntimeError
