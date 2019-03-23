@@ -1,4 +1,3 @@
-require 'json'
 
 # Not sure if you wanted me to write some thing smarter or just match strings.
 # So I added a 'config' so you can run the application in different modes
