@@ -1,4 +1,3 @@
-require 'json'
 
 class GetFilePath
   attr_reader :type, :relative_path_to_file
