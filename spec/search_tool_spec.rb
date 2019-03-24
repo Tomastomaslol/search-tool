@@ -24,8 +24,8 @@ describe 'start_application' do
 
   let(:report_outcome_stub) do
     instance_double(ReportOutcome, 'ReportOutcomeStub',
-                    print: '',
-                    print_all_keys_in_table: '')
+                    print_search_results: '',
+                    print_all_searchable_keys_and_headlines: '')
   end
 
   let(:search_stub) do
@@ -56,7 +56,7 @@ describe 'start_application' do
     it 'prints the returned search result' do
       start_application
       expect(report_outcome_stub)
-        .to have_received(:print).with(expected_response).once
+        .to have_received(:print_search_results).with(expected_response).once
     end
 
     it 'asks the user if they would like to run the application again' do
@@ -74,7 +74,7 @@ describe 'start_application' do
     it 'prints all keys' do
       start_application
       expect(report_outcome_stub)
-        .to have_received(:print_all_keys_in_table).once
+        .to have_received(:print_all_searchable_keys_and_headlines).once
     end
 
     it 'asks the user if they would like to run the application again' do

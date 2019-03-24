@@ -29,9 +29,9 @@ def start_application
     picked_type_data = picked_type.get_all
     found = Search.new(picked_type_data, search_term, search_value).find_matching_terms
 
-    report.print found
+    report.print_search_results found
   when 2
-    report.print_all_keys_in_table all_data_endpoints
+    report.print_all_searchable_keys_and_headlines all_data_endpoints
   else
     raise 'invalid outcome from initial state'
   end

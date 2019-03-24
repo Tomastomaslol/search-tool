@@ -40,7 +40,7 @@ describe ReportOutcome do
       end
     end
 
-    describe '#print_all_keys_in_table' do
+    describe '#print_all_searchable_keys_and_headlines' do
       before do
         allow(Kernel).to receive(:print).and_return('')
       end
@@ -48,16 +48,16 @@ describe ReportOutcome do
       subject { described_class.new }
 
       it 'prints given table headers to the system' do
-        subject.print_all_keys_in_table(all_data_handlers)
+        subject.print_all_searchable_keys_and_headlines(all_data_handlers)
         expect(Kernel).to have_received(:print).with(/User/).twice
       end
 
       it 'prints given table keys to the system' do
-        subject.print_all_keys_in_table(all_data_handlers)
+        subject.print_all_searchable_keys_and_headlines(all_data_handlers)
         expect(Kernel).to have_received(:print).with(/example key1/).twice
       end
     end
-    describe '#print' do
+    describe '#print_search_results' do
       before do
         allow(Kernel).to receive(:print).and_return(nil)
         allow_any_instance_of(described_class)
@@ -67,18 +67,18 @@ describe ReportOutcome do
       subject { described_class.new }
 
       it "prints a 'no search results' message to system if given an empty object" do
-        subject.print([])
+        subject.print_search_results([])
         expect(Kernel).to have_received(:print)
           .with(/No search results found/).once
       end
 
       it "does not print a 'no search results' message to system if given an valid object" do
-        subject.print(example_print_output)
+        subject.print_search_results(example_print_output)
         expect(Kernel).to_not have_received(:print)
       end
 
       it 'prints given data if given a none empty array' do
-        subject.print(example_print_output)
+        subject.print_search_results(example_print_output)
         expect(subject).to have_received(:print_output)
           .with(example_print_output).once
       end

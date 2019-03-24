@@ -11,13 +11,13 @@ class ReportOutcome
     @config = config || default_config
   end
 
-  def print(output)
+  def print_search_results(output)
     return Kernel.print NO_SEARCH_RESULTS_FOUND if output.empty?
 
     print_output output
   end
 
-  def print_all_keys_in_table(table_data)
+  def print_all_searchable_keys_and_headlines(table_data)
     print_break
     table_data.each do |end_point|
       Kernel.print (HEADLINE_BREAK_LINE +
