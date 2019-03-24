@@ -41,9 +41,15 @@ class Search
     raise "Invalid input for Search Service #{errors.join(', ')}" if errors.any?
   end
 
+  def normalize_value_for_matching(term)
+    term.to_s.upcase
+  end
+
   def match_search_result_to_type_array(data_source_value)
     data_source_value.to_a.select do |map_value|
-      map_value.to_s.upcase.include?(search_value.to_s.upcase)
+      normalize_value_for_matching(map_value).include?(
+        normalize_value_for_matching(search_value)
+      )
     end.any?
   end
 
@@ -51,7 +57,9 @@ class Search
     if data_source_value.is_a?(Array)
       match_search_result_to_type_array(data_source_value)
     else
-      data_source_value.to_s.upcase.include?(search_value.to_s.upcase)
+      normalize_value_for_matching(data_source_value).include?(
+        normalize_value_for_matching(search_value)
+      )
     end
   end
 
